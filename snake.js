@@ -229,12 +229,14 @@ let snake = [{
 function animation(){
 setTimeout(function(){
     nettoieCanvas();
+    dessinePomme();
     faireAvancerSerpent();
     dessineLeSerpent();
     animation();
 }, 100);
 }
 animation();
+creerPomme();
 function nettoieCanvas() {
     ctx.fillStyle = "white";
 ctx.strokeStyle = "black";
@@ -269,9 +271,61 @@ function faireAvancerSerpent() {
     snake.unshift(head);
     snake.pop();
 }
-
-
-
-faireAvancerSerpent();
-
 dessineLeSerpent();
+
+
+
+document.addEventListener("keydown", changerDirection);
+
+console.log(changerDirection)
+
+function changerDirection(event) {
+    const FLECHE_GAUCHE = 37;
+    const FLECHE_DROITE = 39;
+    const FLECHE_HAUT = 38;
+    const FLECHE_BAS = 40;
+
+    const direction = event.keyCode;
+
+    const monter = vy === -10;
+    const descendre = vy === 10; 
+    const droite = vx === 10; 
+    const gauche = vx === -10; 
+
+
+    if(direction === FLECHE_GAUCHE && !droite) { vx = -10; vy = 0;}
+    if(direction === FLECHE_HAUT && !descendre) { vx = 0; vy = -10;}
+    if(direction === FLECHE_DROITE && !gauche) { vx = 10; vy = 0;}
+    if(direction === FLECHE_BAS && !monter) { vx = 0; vy = 10;}
+
+
+}
+
+function random() {
+    return Math.round((Math.random()* 290) /10) *10
+}
+
+function creerPomme() {
+
+    pommeX = random();
+    pommeY = random();
+
+    snake.forEach(function(partieSerpent) {
+        const serpentSurPomme = partieSerpent.x  == pommeX && partieSerpent.y == pommeY;
+
+        if(serpentSurPomme) {
+            creerPomme();
+
+        }
+    })
+}
+
+function dessinePomme() {
+    ctx.fillStyle = "red";
+    ctx.strokeStyle = "darkred";
+    ctx.beginPath();
+    ctx.arc(pommeX, pommeY, 5, 0, 2 * Math.PI)
+    ctx.fill();
+    ctx.stroke();
+
+}
