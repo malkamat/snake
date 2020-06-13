@@ -1,4 +1,4 @@
-//*
+/*
 
 
 class BankAccount {
@@ -116,7 +116,8 @@ const binarySearch = (array, thingToFind, start, end) => {
     } else {
         return binarySearch(array,thingToFind,mid + 1, end);
     }
-}*/
+}
+*/
 
 
 
