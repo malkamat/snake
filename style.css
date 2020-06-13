@@ -11,6 +11,12 @@ body {
     transform: translate(-50%, -50%);
 }
 
+#recommencer {
+    color: whitesmoke;
+}
+#score {
+    color: whitesmoke;
+}
 h1, p {
     color: aliceblue;
 }
